@@ -41,6 +41,16 @@ app.get("/details/:id", async (req, res) => {
     res.status(500).json({ type: "error", message: error.message });
   }
 });
+app.get("/search/:searchparam", async (req, res) => {
+  try {
+    const response = await axios.get(
+      `http://www.omdbapi.com/?s=${req.params.searchparam}&apikey=137680e0`
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ type: "error", message: error.message });
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
