@@ -10,9 +10,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/movies", async (req, res) => {
+app.get("/:type/new", async (req, res) => {
   try {
-    const response = await axios.get(API_URL);
+    const response = await axios.get(
+      `https://vidsrc.to/vapi/${req.params.type}/new/1`
+    );
     res.json(response.data);
   } catch (error) {
     res.status(500).json({ type: "error", message: error.message });
