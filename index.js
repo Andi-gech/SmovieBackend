@@ -20,6 +20,16 @@ app.get("/:type/new", async (req, res) => {
     res.status(500).json({ type: "error", message: error.message });
   }
 });
+app.get("/:type/new", async (req, res) => {
+  try {
+    const response = await axios.get(
+      `https://vidsrc.to/vapi/${req.params.type}/add/1`
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ type: "error", message: error.message });
+  }
+});
 
 app.get("/details/:id", async (req, res) => {
   try {
